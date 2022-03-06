@@ -12,9 +12,7 @@
   </a>  
 </p>
 
-__This Is Just An Simple Advance Auto Filter Bot Complete Rewritten Version Of [URL Shortener](https://github.com/t2links/URL-Shortener-bot)__
-
-__Just Send Any Link To Short. It Will Short To Droplink Link or Save it to your MDisk Account__
+__Just Send Any Link To Short. It Will Short To Save it to your MDisk Account__
 
 
 ## Usage
@@ -43,9 +41,6 @@ Pre Requisites
 
 * -> __Your Telegram ID and ID of Users you want add as Admin__
 
-* -> __Select your preferred METHOD between droplink or mdisk.__
-
-* -> __Get your DROPLINK_KEY from https://droplink.co/member/tools/api.__
 * -> __Get your MDISK API KEY from https://t.me/VideoToolMoneyTreebot.__
 
 #### PR's Are Very Welcome

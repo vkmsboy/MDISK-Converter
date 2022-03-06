@@ -1,68 +1,11 @@
-from config import MDISK_API, DROPLINK_API, EXCLUDE_DOMAIN, INCLUDE_DOMAIN
+from config import MDISK_API
 import re
-import aiohttp
 import requests
-
-
-####################  droplink  ####################
-
-
-async def get_shortlink(link, x):
-    https = link.split(":")[0]
-    if "http" == https:
-        https = "https"
-        link = link.replace("http", https)
-        print(link)
-    url = f'https://droplink.co/api'
-    params = {'api': DROPLINK_API,
-              'url': link,
-              'alias': x
-              }
-
-
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url, params=params, raise_for_status=True, ssl=False) as response:
-            data = await response.json()
-            if data["status"] == "success":
-                return data['shortenedUrl']
-            else:
-                return f"Error: {data['message']}"
-
-
-async def replace_link(text, x):
-    links = re.findall(r'https?://[^\s]+', text)
-    for link in links:
-
-        if INCLUDE_DOMAIN:
-            include = INCLUDE_DOMAIN.split(',')
-            domain = [domain.strip() for domain in include]
-            if any(i in link for i in domain):
-                short_link = await get_shortlink(link, x)
-                text = text.replace(link, short_link)
-                print(f"Included domain link: {link}")
-
-        elif EXCLUDE_DOMAIN:
-            exclude = EXCLUDE_DOMAIN.split(',')
-            domain = [domain.strip() for domain in exclude]
-            if any(i in link for i in domain):
-                print(f"Excluded domain link: {link}")
-                print(True, False)
-            else:
-                short_link = await get_shortlink(link, x)
-                print(short_link)
-                text = text.replace(link, short_link)
-
-        else:
-            short_link = await get_shortlink(link, x)
-            print(short_link)
-            text = text.replace(link, short_link)
-
-    return text
-
-
+from pyrogram.types import MessageEntity
+import ast
+from pyrogram.types.list import List
 
 ####################  Mdisk  ####################
-
 
 async def get_mdisk(link):
     url = 'https://diskuploader.mypowerdisk.com/v1/tp/cp'
@@ -80,7 +23,36 @@ async def get_mdisk(link):
 async def replace_mdisk_link(text):
     links = re.findall(r'https?://mdisk.me[^\s]+', text)
     for link in links:
-        mdisk_link = await get_mdisk(link)
-        text = text.replace(link, mdisk_link)
+        try:
+            mdisk_link = await get_mdisk(link)
+            text = text.replace(link, mdisk_link)
+        except:
+            text = text.replace(link, text)
 
     return text
+
+
+# caption entities
+
+
+async def caption(caption_entities):
+    x = []
+    string = str(caption_entities)
+    res = ast.literal_eval(string)
+    for i in res:
+        print(i)
+
+        if "url" in i:
+            print("Url")
+            x.append(
+                MessageEntity(type=i["type"], offset=i["offset"], length=i["length"], url=await get_mdisk(i["url"])))
+        elif "user" in i:
+            print("user")
+            x.append(MessageEntity(type=i["type"], offset=i["offset"], length=i["length"], url=i["user"]))
+        else:
+            print("others")
+            x.append(MessageEntity(type=i["type"], offset=i["offset"], length=i["length"]))
+    entities = List(x)
+    return entities
+
+

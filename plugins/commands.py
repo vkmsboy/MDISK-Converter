@@ -1,15 +1,10 @@
 from pyrogram import Client, filters
 from translation import START_MESSAGE, HELP_MESSAGE, ABOUT_TEXT
-from config import METHOD
 
 
 @Client.on_message(filters.command('start'))
 async def start(c, m):
-    if METHOD == "":
-        mode = "None"
-    else:
-        mode = METHOD
-    await m.reply_text(START_MESSAGE.format(m.from_user.mention, mode))
+    await m.reply_text(START_MESSAGE.format(m.from_user.mention))
 
 
 @Client.on_message(filters.command('help'))

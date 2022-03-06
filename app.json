@@ -21,27 +21,9 @@
       "description": "Get this value from https://my.telegram.org",
       "value": ""
     },
-    "METHOD": {
-      "description": "Select your preferred METHOD between droplink or mdisk. Enter exactly droplink or mdisk in lowercase",
-      "value": ""
-    },
-    "DROPLINK_API": {
-      "description": "Enter your DROPLINK API KEY only if METHOD is selected to droplink. Get your API from https://droplink.co/member/tools/api",
-      "value": "0"
-    },
     "MDISK_API": {
       "description": "Enter your MDISK API KEY only if METHOD is selected to mdisk. Get your API_ID from t.me/VideoToolMoneyTreebot",
       "value": "0"
-    },
-    "INCLUDE_DOMAIN": {
-      "description": "Use this option if you want to short only links from the given domains list. Separate each domain by comma, Works only when mode is selected to droplink",
-      "value": "",
-      "required": false
-    },
-    "EXCLUDE_DOMAIN": {
-      "description": "Use this option if you wish to short every link on your website but exclude only the links from the given domains list. Separate each domain by comma, Works only when mode is selected to droplink",
-      "value": "",
-      "required": false
     },
     "CHANNELS": {
       "description": "Enter True if you want the bot to work in Channels also else Leave it as it is",
