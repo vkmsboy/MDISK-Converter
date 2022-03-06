@@ -1,7 +1,7 @@
 {
-  "name": "Url-Shortener-bot-V2",
-  "description": "Make short link by using Shortener using API key",
-  "logo": "https://i.ibb.co/z6Rs1dz/automation-inspiration-URLshortener-00-hero.jpg",
+  "name": "Mdisk Convertor",
+  "description": "Convert Others Mdisk Lnk to Yours using Mdisk API key",
+  "logo": "https://i.ibb.co/XFcL3f4/unnamed.webp",
   "keywords": [
     "telegram",
     "shortener"
