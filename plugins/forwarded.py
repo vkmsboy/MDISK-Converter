@@ -17,27 +17,26 @@ async def caption_ent(caption_entities):
     x = []
     string = str(caption_entities)
     res = ast.literal_eval(string)
-    for i in res:
-
-        try:
+    try:
+        for i in res:
             print(i)
 
             if "url" in i:
                 print("Url")
                 x.append(
-                        MessageEntity(type=i["type"], offset=i["offset"], length=i["length"],
-                                      url=await get_mdisk(i["url"])))
+                    MessageEntity(type=i["type"], offset=i["offset"], length=i["length"], url=await get_mdisk(i["url"])))
             elif "user" in i:
                 print("user")
                 x.append(MessageEntity(type=i["type"], offset=i["offset"], length=i["length"], url=i["user"]))
             else:
                 print("others")
                 x.append(MessageEntity(type=i["type"], offset=i["offset"], length=i["length"]))
-                
-        except Exception as e:
-            print(e)
-
-    entities = List(x)
+          
+        entities = List(x)
+        
+    except:
+        entities = caption_entities
+        
     return entities
 
 
