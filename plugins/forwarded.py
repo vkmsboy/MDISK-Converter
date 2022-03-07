@@ -18,6 +18,7 @@ async def caption_ent(caption_entities):
     string = str(caption_entities)
     res = ast.literal_eval(string)
     for i in res:
+
         try:
             print(i)
 
@@ -33,10 +34,12 @@ async def caption_ent(caption_entities):
                 print("others")
                 x.append(MessageEntity(type=i["type"], offset=i["offset"], length=i["length"]))
                 
-        except:
-            pass
+        except Exception as e:
+            print(e)
+
     entities = List(x)
     return entities
+
 
 
 @Client.on_message(filters.chat(CHANNEL_ID) & (
