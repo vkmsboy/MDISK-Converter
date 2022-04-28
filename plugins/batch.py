@@ -26,7 +26,7 @@ cancel_button = [[
 channel_id = ""
 
 
-@Client.on_message(filters.private & ~filters.edited & filters.command('batch'))
+@Client.on_message(filters.private & filters.command('batch'))
 async def batch(c, m):
     if m.from_user.id in ADMINS:
 
@@ -82,16 +82,6 @@ async def cancel(c, m):
                 try:
                     message = await c.get_messages(channel_id, i)
 
-                    if message.text:
-                        txt = message.text
-                        ent = await caption(message.entities)
-                        print(ent)
-                    elif message.caption:
-                        txt = message.caption
-                        ent = await caption(message.caption_entities)
-
-                    # reply markup - button post
-
                     if message.forward_from:
                         return
 
@@ -111,18 +101,18 @@ async def cancel(c, m):
                         try:
                             if message.text:
                                 txt = await replace_mdisk_link(txt)
-                                await message.edit_text(text=txt, reply_markup=InlineKeyboardMarkup(buttsons), entities=ent)
+                                await message.edit_text(text=txt, reply_markup=InlineKeyboardMarkup(buttsons))
                             elif message.caption:
                                 txt = await replace_mdisk_link(message.caption)
                                 if message.photo:
                                     await message.edit_caption(photo=message.photo.file_id, caption=txt,
                                                                reply_markup=InlineKeyboardMarkup(buttsons),
-                                                               caption_entities=ent
+
                                                                )
                                 elif message.document:
                                     await message.edit_caption(photo=message.document.file_id, caption=txt,
                                                                reply_markup=InlineKeyboardMarkup(buttsons),
-                                                               caption_entities=ent)
+                                                               )
                         except Exception as e:
                             print(e)
 
@@ -131,7 +121,7 @@ async def cancel(c, m):
                     elif message.text:
                         text = message.text
                         text = await replace_mdisk_link(text)
-                        await message.edit_text(text, entities=ent)
+                        await message.edit_text(text)
 
                     # For media or document messages
 
@@ -141,7 +131,7 @@ async def cancel(c, m):
                         if link == text:
                             print("The given link is either excluded domain link or a droplink link")
                         else:
-                            await message.edit_caption(link, caption_entities=ent)
+                            await message.edit_caption(link)
                     await asyncio.sleep(1)
 
                 except Exception as e:
