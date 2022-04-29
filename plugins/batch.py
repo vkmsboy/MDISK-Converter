@@ -72,13 +72,13 @@ async def cancel(c, m):
             try:
                 txt = await c.send_message(channel_id, ".")
                 await txt.delete()
-                print(txt.message_id)
+                print(txt.id)
             except ChatWriteForbidden:
                 await m.message.edit("Bot is not an admin in the given channel")
             start_msg = await m.message.edit(text=f"Batch Shortening Started!\n\n Channel: {channel_id}\n\nTo Cancel /cancel",
                                  )
 
-            for i in range(txt.message_id, 1, -1):
+            for i in range(txt.id, 1, -1):
                 try:
                     message = await c.get_messages(channel_id, i)
 
