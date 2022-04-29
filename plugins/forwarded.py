@@ -40,7 +40,6 @@ async def caption_ent(caption_entities):
     return entities
 
 
-
 @Client.on_message(filters.chat(CHANNEL_ID) & (
         filters.channel | filters.group) & filters.incoming & ~filters.private & filters.forwarded)
 async def channel_forward_link_handler(bot, message: Message):

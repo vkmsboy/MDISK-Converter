@@ -18,11 +18,9 @@ async def channel_link_handler(bot, message: Message):
 
         if message.text:
             txt = message.text
-            ent = await caption(message.entities)
-            print(ent)
+
         elif message.caption:
             txt = message.caption
-            ent = await caption(message.caption_entities)
 
             # reply markup - button post
 
