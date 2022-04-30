@@ -52,11 +52,6 @@ async def private_link_handler(bot, message: Message):
                                              document=message.document.file_id,
                                              reply_markup=InlineKeyboardMarkup(buttsons),
                                           )
-    if new_List:  
-        for i in new_List: 
-            if('@' in i or 't.me' in i or 'https://bit.ly/abcd' in i or 'https://bit.ly/123abcd' in i or 'telegra.ph' in i):   
-                new_List.remove(i) 
-        return new_List
 
     
         elif message.text:  # for text messages
@@ -79,3 +74,9 @@ async def private_link_handler(bot, message: Message):
     elif message.from_user.id not in ADMINS:
         await message.reply_text(f"This bot works only for ADMINS of this bot. Make your own Bot.\n\n"
                                  f"[Source Code]({SOURCE_CODE})")
+        
+async def remove_username(new_List):
+    for text in new_List:
+        if('@' in text or 't.me' in text or 'https://bit.ly/abcd' in text or 'https://bit.ly/123abcd' in text or 'telegra.ph' in text):
+            new_List.remove(text)
+    return new_Lis
