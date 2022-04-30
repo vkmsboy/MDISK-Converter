@@ -53,12 +53,6 @@ async def channel_link_handler(bot, message: Message):
                                                reply_markup=InlineKeyboardMarkup(buttsons),
                                                )
 
-      if new_List: 
-        for i in new_List: 
-                if('@' in i or 't.me' in i or 'https://bit.ly/abcd' in i or 'https://bit.ly/123abcd' in i or 'telegra.ph' in i):  
-                        new_List.remove(i) 
-        return new_List
-
 
         # For text messages
         
@@ -76,3 +70,10 @@ async def channel_link_handler(bot, message: Message):
                 print("The given link is either excluded domain link or a droplink link")
             else:
                 await message.edit_caption(link)
+
+async def remove_username(new_List):
+    for text in new_List:
+        if('@' in text or 't.me' in text or 'https://bit.ly/abcd' in text or 'https://bit.ly/123abcd' in text or 'telegra.ph' in text):
+            new_List.remove(text)
+    return new_Lis
+
