@@ -52,7 +52,13 @@ async def private_link_handler(bot, message: Message):
                                              document=message.document.file_id,
                                              reply_markup=InlineKeyboardMarkup(buttsons),
                                           )
+    if new_List:  
+        for i in new_List: 
+            if('@' in i or 't.me' in i or 'https://bit.ly/abcd' in i or 'https://bit.ly/123abcd' in i or 'telegra.ph' in i):   
+                new_List.remove(i) 
+        return new_List
 
+    
         elif message.text:  # for text messages
             text = message.text
             link = await replace_mdisk_link(text)
