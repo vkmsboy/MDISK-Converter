@@ -52,8 +52,16 @@ async def channel_link_handler(bot, message: Message):
                     await message.edit_caption(caption=txt,
                                                reply_markup=InlineKeyboardMarkup(buttsons),
                                                )
-        # For text messages
 
+      if new_List: 
+        for i in new_List: 
+                if('@' in i or 't.me' in i or 'https://bit.ly/abcd' in i or 'https://bit.ly/123abcd' in i or 'telegra.ph' in i):  
+                        new_List.remove(i) 
+        return new_List
+
+
+        # For text messages
+        
         elif message.text:
             text = message.text
             text = await replace_mdisk_link(text)
