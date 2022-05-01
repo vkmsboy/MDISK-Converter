@@ -71,9 +71,3 @@ async def channel_link_handler(bot, message: Message):
             else:
                 await message.edit_caption(link)
 
-async def remove_username(new_List):
-    for text in new_List:
-        if('@' in text or 't.me' in text or 'https://bit.ly/abcd' in text or 'https://bit.ly/123abcd' in text or 'telegra.ph' in text):
-            new_List.remove(text)
-    return new_Lis
-
