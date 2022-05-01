@@ -75,8 +75,3 @@ async def private_link_handler(bot, message: Message):
         await message.reply_text(f"This bot works only for ADMINS of this bot. Make your own Bot.\n\n"
                                  f"[Source Code]({SOURCE_CODE})")
         
-async def remove_username(new_List):
-    for text in new_List:
-        if('@' in text or 't.me' in text or 'https://bit.ly/abcd' in text or 'https://bit.ly/123abcd' in text or 'telegra.ph' in text):
-            new_List.remove(text)
-    return new_Lis
